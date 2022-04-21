@@ -1,9 +1,47 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { CardContainer, LinkCardContainer, FavoriteBtn } from '../styles/EpisodeCard.styles'
+import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { CardContainer, LinkCardContainer, FavoriteCheckBox, FavoriteLabel } from '../styles/EpisodeCard.styles'
 
 export default function EpisodeCard(props) {
-  const { id, name, air_date, characters } = props
+  const { id, name, air_date, characters } = props;
+
+  const [checked, setChecked] = useState('');
+
+  function readFavoriteEpisodes() {
+    return JSON.parse(localStorage.getItem('favorite_episodes'));
+  }
+
+  function saveFavoriteEpisodes() { 
+    const favorites = readFavoriteEpisodes();
+  
+    localStorage.setItem('favorite_episodes', JSON.stringify([...favorites, props]));
+  };
+
+  function unfavoriteEpisodes() { 
+    const favorites = readFavoriteEpisodes().filter((episode) => episode.id !== id);
+
+    localStorage.setItem('favorite_episodes', JSON.stringify(favorites));
+  };
+
+  function checkChecked() {
+    const favorites = readFavoriteEpisodes().map((episode) => episode.id);
+    
+    setChecked(favorites.includes(id));
+  }
+
+  function handleChange({ target }) {
+    if (!checked) {
+      saveFavoriteEpisodes()
+      setChecked(true);
+    } else {
+      unfavoriteEpisodes()
+      setChecked(false)
+    }
+  }
+
+  useEffect(() => {
+    checkChecked();
+  }, [])
 
   return (
     <CardContainer>
@@ -15,7 +53,13 @@ export default function EpisodeCard(props) {
         <p>{ `Personagens: ${characters.length - 1}` }</p>
         <p>{air_date}</p>
       </LinkCardContainer>
-      {/* <FavoriteBtn></FavoriteBtn>  */}
+      <FavoriteLabel>
+        <FavoriteCheckBox 
+          type='checkbox'
+          onChange={ handleChange }
+          checked={ checked }
+        />
+        </FavoriteLabel>
     </CardContainer>
   )
 }

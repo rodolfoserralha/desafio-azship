@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
+  const storage = JSON.parse(localStorage.getItem('favorite_episodes'));
+  if (!storage) localStorage.setItem('favorite_episodes', JSON.stringify([]));
+
   return (
     <Main>
       <ImgBackground src={rick} alt="img" />

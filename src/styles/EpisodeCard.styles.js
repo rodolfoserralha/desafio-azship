@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import icon from "../images/iconmonstr-favorite-3.svg";
 
 export const CardContainer = styled.div`
   background: #f2f2f2;
@@ -35,35 +36,25 @@ export const LinkCardContainer = styled(Link)`
   }
 `;
 
-export const FavoriteBtn = styled.button`
-  border: none;
-  border-radius: 50%;
-  display: inline-block;
-  position: relative;
-  font-size: 32px;
-  cursor: pointer;
-  height: 50px;
+export const FavoriteLabel = styled.label``;
 
-  &:before {
-    font-size: 1em;
-    color: #000;
-    content: "♥";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-  &:after {
-    font-size: 3em;
-    color: $red;
-    content: "♥";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.2s;
-  }
-  &.liked::after {
-    transform: translate(-50%, -50%) scale(1.1);
+export const FavoriteCheckBox = styled.input`
+  align-items: center;
+  appearance: none;
+  border: none;
+  border-radius: 5px;
+  content: url(${icon});
+  cursor: pointer;
+  display: flex;
+  font-size: 15px;
+  height: 30px;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 8px !important;
+  width: 30px;
+
+  &:checked {
+    filter: invert(20%) sepia(95%) saturate(6888%) hue-rotate(358deg)
+      brightness(110%) contrast(114%);
   }
 `;
