@@ -36,6 +36,11 @@ export const LinkCardContainer = styled(Link)`
   }
 `;
 
+export const InputsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+`
 export const FavoriteLabel = styled.label``;
 
 export const FavoriteCheckBox = styled.input`
@@ -49,12 +54,31 @@ export const FavoriteCheckBox = styled.input`
   font-size: 15px;
   height: 30px;
   justify-content: center;
-  margin: auto;
   margin-bottom: 8px !important;
   width: 30px;
 
   &:checked {
     filter: invert(20%) sepia(95%) saturate(6888%) hue-rotate(358deg)
       brightness(110%) contrast(114%);
+  }
+`;
+
+export const ViewedCheckBox = styled.input`
+  align-items: center;
+  // appearance: none;
+  border: 1px solid black;
+  border-radius: 5px;
+
+  cursor: pointer;
+  display: flex;
+  font-size: 15px;
+  height: 30px;
+  justify-content: center;
+  margin-bottom: 8px !important;
+  width: 30px;
+
+  &:checked {
+    background-color: #1e2838;
+    color: white;
   }
 `;

@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const navigate = useNavigate();
   const storage = JSON.parse(localStorage.getItem('favorite_episodes'));
+  const viewed = JSON.parse(localStorage.getItem('viewed_episodes'));
+  if (!viewed) localStorage.setItem('viewed_episodes', JSON.stringify([]));
   if (!storage) localStorage.setItem('favorite_episodes', JSON.stringify([]));
 
   return (

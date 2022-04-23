@@ -11,6 +11,8 @@ import {
   GridContainer,
   NumberPageBtn,
   PageNumberContainer,
+  SearchInput,
+  SearchInputContainer,
 } from "../styles/Episodes.styles";
 import Context from "../context/Context";
 
@@ -25,7 +27,7 @@ export default function Episodes() {
   async function fetchApis() {
     if (episodes.length > 2) return;
     setLoading(true);
- 
+
     const [first, second, third] = await Promise.all([
       fetchApiEpisode1(),
       fetchApiEpisode2(),
@@ -76,6 +78,12 @@ export default function Episodes() {
         <Loading />
       ) : (
         <>
+          <SearchInputContainer>
+            <SearchInput
+              type="text"
+              placeholder="Pesquisar por nome do episódio"
+            />
+          </SearchInputContainer>
           <GridContainer>
             {episodes?.slice(from, to).map((episode) => {
               return (

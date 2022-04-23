@@ -1,26 +1,38 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import { readFavoriteEpisodes, saveFavoriteEpisodes, unfavoriteEpisodes } from '../helpers/localStorage';
-import { CardContainer, LinkCardContainer, FavoriteCheckBox, FavoriteLabel } from '../styles/EpisodeCard.styles'
+import { readFavoriteEpisodes, readViewedEpisodes, saveFavoriteEpisodes, saveViewedEpisodes, unfavoriteEpisodes, unViewedEpisodes } from '../helpers/localStorage';
+import { CardContainer, LinkCardContainer, FavoriteCheckBox, InputsContainer, FavoriteLabel, ViewedCheckBox } from '../styles/EpisodeCard.styles'
 
 export default function EpisodeCard(props) {
   const { id, name, air_date, characters } = props;
 
   const [checked, setChecked] = useState('');
+  const [viewed, setViewed] = useState('');
 
   function checkChecked() {
     const favorites = readFavoriteEpisodes().map((episode) => episode.id);
-    
+    const view = readViewedEpisodes().map((episode) => episode.id);
+    setViewed(view.includes(id));
     setChecked(favorites.includes(id));
   }
 
-  function handleChange({ target }) {
+  function handleChange() {
     if (!checked) {
       saveFavoriteEpisodes(props)
       setChecked(true);
     } else {
       unfavoriteEpisodes(id)
       setChecked(false)
+    }
+  }
+
+  function handleViewed() {
+    if (!viewed) {
+      saveViewedEpisodes(props)
+      setViewed(true);
+    } else {
+      unViewedEpisodes(id)
+      setViewed(false)
     }
   }
 
@@ -38,13 +50,20 @@ export default function EpisodeCard(props) {
         <p>{ `Personagens: ${characters.length - 1}` }</p>
         <p>{air_date}</p>
       </LinkCardContainer>
-      <FavoriteLabel>
-        <FavoriteCheckBox 
-          type='checkbox'
-          onChange={ handleChange }
-          checked={ checked }
-        />
-        </FavoriteLabel>
+      <InputsContainer>
+        <FavoriteLabel>
+          <FavoriteCheckBox 
+            type='checkbox'
+            onChange={ handleChange }
+            checked={ checked }
+          />
+          </FavoriteLabel>
+          <ViewedCheckBox 
+            type='checkbox'
+            onChange={ handleViewed }
+            checked={ viewed }
+          />
+      </InputsContainer>
     </CardContainer>
   )
 }

@@ -11,6 +11,24 @@ export const GridContainer = styled.div`
   width: 100%;
 `;
 
+export const SearchInputContainer = styled.div`
+  margin-top: 20px;
+  text-align: center;
+`;
+
+export const SearchInput = styled.input`
+  border-radius: 10px;
+  background: url("https://static.thenounproject.com/png/101791-200.png")
+    no-repeat 7px;
+  background-size: 25px;
+  border: 2px solid #1e2838;
+  font-family: 'Montserrat';
+  padding-left: 35px !important;
+  padding: 12px;
+  outline: none;
+  width: 30%;
+`;
+
 export const PageNumberContainer = styled.div`
   display: flex;
   justify-content: center;
