@@ -3,13 +3,17 @@ import { useParams } from "react-router-dom";
 import EpisodeDetailCard from "../components/EpisodeDetailCard";
 import Context from "../context/Context";
 import {
+  EpisodeDate,
   EpisodeDetailContainer,
   EpisodeTitle,
+  TitleDateContainer,
 } from "../styles/EpisodeDetail.styles";
 import Header from "../components/Header";
+import { MainDiv } from "../styles/EpisodeDetailsCard.styles";
+import GoBack from "../components/GoBack";
 
 export default function EpisodeDetails() {
-  const { episodes, setEpisodes, characters, setCharacters } =
+  const { episodes } =
     useContext(Context);
   const [episodeInfo, setEpisodeInfo] = useState("");
   const { id } = useParams();
@@ -24,12 +28,17 @@ export default function EpisodeDetails() {
   }, []);
 
   return (
-    <>
+    <MainDiv>
       <Header />
       <EpisodeDetailContainer>
-        <EpisodeTitle>{`Episódio N ${episodeInfo.id} - ${episodeInfo.name} - ${episodeInfo.air_date}`}</EpisodeTitle>
-        <EpisodeDetailCard />
+        <GoBack />
+        <TitleDateContainer>
+          <EpisodeTitle>{`Episódio N ${episodeInfo.id} - ${episodeInfo.name}`}</EpisodeTitle>
+          <EpisodeDate>{episodeInfo.air_date}</EpisodeDate>
+          <h2>Personagens presentes no episódio:</h2>
+        </TitleDateContainer>
       </EpisodeDetailContainer>
-    </>
+      <EpisodeDetailCard />
+    </MainDiv>
   );
 }

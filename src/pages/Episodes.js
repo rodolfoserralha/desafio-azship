@@ -23,6 +23,7 @@ export default function Episodes() {
   const { episodes, setEpisodes } = useContext(Context);
 
   async function fetchApis() {
+    if (episodes.length > 2) return;
     setLoading(true);
  
     const [first, second, third] = await Promise.all([

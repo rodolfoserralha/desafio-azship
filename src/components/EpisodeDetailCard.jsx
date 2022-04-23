@@ -1,42 +1,40 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Context from '../context/Context';
-import { getCharacterByName } from '../helpers/fetchApi';
+import { filterCharacterByName } from '../helpers/fetchApi';
+import { CardList } from '../styles/CharacterCard.styles';
+import CharacterCard from './CharacterCard';
 
 export default function EpisodeDetailCard() {
-  const { episodes, setEpisodes, characters, setCharacters } = useContext(Context);
-  const [episodeInfo, setEpisodeInfo] = useState('');
+  const { episodes } = useContext(Context);
+  const [episodeCharacters, setEpisodeCharacters] = useState([]);
   const { id } = useParams();
 
-  const lucy =         {
-    "id": "210",
-    "name": "Lucy",
-    "status": "Dead",
-    "species": "Human",
-    "image": "https://rickandmortyapi.com/api/character/avatar/210.jpeg"
-  }
 
   async function fetchCharacters() {
     const [filteredEpisode] = episodes.filter((episode) => episode.id === id);
-    setEpisodeInfo(filteredEpisode)
+    const array = [];
+    console.log(filteredEpisode);
+  
+    await Promise.all(filteredEpisode.characters.map(async (char) => {
+      const result = await filterCharacterByName(char.name);
+      return array.push(result);
+    }))
     
-    // filteredEpisode.characters[0].map((character) => {
-    //   return getCharacterByName(character.name)
-    // })
-
-    // await filteredEpisode.characters.map((character) => {
-    //   const result = getCharacterByName(character.name)
-    //   console.log(result)
-    // })
+    setEpisodeCharacters(array);
   }
 
-  // useEffect(() => {
-  //   fetchCharacters();
-  // }, [])
+  useEffect(() => {
+    fetchCharacters()
+  }, [])
 
   return (
-    <div>
-      
-    </div>
+    <CardList>
+      { 
+        episodeCharacters.map((char) => {
+          return <CharacterCard key={char.id} name={char.name} specie={char.species} status={char.status} image={char.image} />
+        })
+      }
+    </CardList>
   )
 }

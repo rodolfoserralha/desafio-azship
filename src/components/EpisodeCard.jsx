@@ -1,27 +1,12 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
+import { readFavoriteEpisodes, saveFavoriteEpisodes, unfavoriteEpisodes } from '../helpers/localStorage';
 import { CardContainer, LinkCardContainer, FavoriteCheckBox, FavoriteLabel } from '../styles/EpisodeCard.styles'
 
 export default function EpisodeCard(props) {
   const { id, name, air_date, characters } = props;
 
   const [checked, setChecked] = useState('');
-
-  function readFavoriteEpisodes() {
-    return JSON.parse(localStorage.getItem('favorite_episodes'));
-  }
-
-  function saveFavoriteEpisodes() { 
-    const favorites = readFavoriteEpisodes();
-  
-    localStorage.setItem('favorite_episodes', JSON.stringify([...favorites, props]));
-  };
-
-  function unfavoriteEpisodes() { 
-    const favorites = readFavoriteEpisodes().filter((episode) => episode.id !== id);
-
-    localStorage.setItem('favorite_episodes', JSON.stringify(favorites));
-  };
 
   function checkChecked() {
     const favorites = readFavoriteEpisodes().map((episode) => episode.id);
@@ -31,10 +16,10 @@ export default function EpisodeCard(props) {
 
   function handleChange({ target }) {
     if (!checked) {
-      saveFavoriteEpisodes()
+      saveFavoriteEpisodes(props)
       setChecked(true);
     } else {
-      unfavoriteEpisodes()
+      unfavoriteEpisodes(id)
       setChecked(false)
     }
   }

@@ -47,8 +47,10 @@ export async function getCharacterByName(name) {
       Accept: "application/json",
     },
     body: JSON.stringify({
-      query: `query {
-        characters(filter: { name: `+`${name}`` }) {
+      query:
+        `query {
+        characters(filter: { name: ` +
+        `${name}`` }) {
           results {
           id
           name
@@ -61,6 +63,14 @@ export async function getCharacterByName(name) {
     `,
     }),
   }).then((res) => res.json());
-  console.log(data)
+  console.log(data);
   return data;
+}
+
+export async function filterCharacterByName(name) {
+  const data = await fetch(
+    `https://rickandmortyapi.com/api/character/?name=${name}`
+  ).then((res) => res.json());
+
+  return data.results[0];
 }
