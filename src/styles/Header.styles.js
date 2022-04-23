@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
@@ -12,8 +13,11 @@ export const HeaderContainer = styled.header`
   img {
     width: 15%;
   }
+`;
 
-  h1 {
-    color: white;
-  }
+export const HeaderLink = styled(Link)`
+  color: white;
+  font-size: 35px;
+  font-weight: 700;
+  text-decoration: none;
 `;
