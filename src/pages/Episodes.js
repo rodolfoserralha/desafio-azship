@@ -21,6 +21,7 @@ export default function Episodes() {
   const [from, setFrom] = useState(0);
   const [to, setTo] = useState(12);
   const [loading, setLoading] = useState(false);
+  const [filterValue, setFilterValue] = useState("");
 
   const { episodes, setEpisodes } = useContext(Context);
 
@@ -82,20 +83,24 @@ export default function Episodes() {
             <SearchInput
               type="text"
               placeholder="Pesquisar por nome do episódio"
+              onChange={({ target }) => setFilterValue(target.value)}
             />
           </SearchInputContainer>
           <GridContainer>
-            {episodes?.slice(from, to).map((episode) => {
-              return (
-                <EpisodeCard
-                  key={episode.id}
-                  name={episode.name}
-                  characters={episode.characters}
-                  id={episode.id}
-                  air_date={episode.air_date}
-                />
-              );
-            })}
+            {episodes
+              ?.filter((episode) => episode.name.includes(filterValue))
+              .slice(from, to)
+              .map((episode) => {
+                return (
+                  <EpisodeCard
+                    key={episode.id}
+                    name={episode.name}
+                    characters={episode.characters}
+                    id={episode.id}
+                    air_date={episode.air_date}
+                  />
+                );
+              })}
           </GridContainer>
           <PageNumberContainer>
             <NumberPageBtn
