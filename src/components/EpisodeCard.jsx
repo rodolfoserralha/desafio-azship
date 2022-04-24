@@ -47,7 +47,7 @@ export default function EpisodeCard(props) {
           <p><strong>{ `Episódio Nº ${id}`}</strong></p>
         </div>
         <p>{name}</p>
-        <p>{ `Personagens: ${characters.length - 1}` }</p>
+        <p>{ `Personagens: ${characters.length}` }</p>
         <p>{air_date}</p>
       </LinkCardContainer>
       <InputsContainer>

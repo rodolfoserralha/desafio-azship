@@ -6,13 +6,13 @@ export const GridContainer = styled.div`
   // grid-template-rows: 9% 9% 9% 9% 9% 9% 9% 9% 9%;
   grid-auto-rows: minmax(9%, auto);
   grid-gap: 50px;
-  margin-top: 50px;
+  margin-top: 30px;
   justify-content: center;
   width: 100%;
 `;
 
 export const SearchInputContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 30px;
   text-align: center;
 `;
 
@@ -22,7 +22,7 @@ export const SearchInput = styled.input`
     no-repeat 7px;
   background-size: 25px;
   border: 2px solid #1e2838;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   padding-left: 35px !important;
   padding: 12px;
   outline: none;
@@ -32,7 +32,7 @@ export const SearchInput = styled.input`
 export const PageNumberContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 30px;
   width: 100%;
 `;
 
@@ -45,6 +45,7 @@ export const NumberPageBtn = styled.button`
   font-weight: 600;
   font-size: 20px;
   margin: 5px;
+  margin-bottom: 20px;
   height: 50px;
   width: 50px;
 

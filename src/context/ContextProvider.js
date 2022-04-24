@@ -4,10 +4,9 @@ import Context from './Context';
 
 export default function ContextProvider({ children }) {
   const [episodes, setEpisodes] = useState([]);
-  const [characters, setCharacters] = useState([]);
 
   const contextValue = {
-    episodes, setEpisodes, characters, setCharacters
+    episodes, setEpisodes
   };
 
   return (
