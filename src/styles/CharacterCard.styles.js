@@ -20,6 +20,10 @@ export const CharacterCardContainer = styled.div`
   overflow: hidden;
   // height: 350px;
   width: 12%;
+
+  @media (max-width: 1000px) {
+    width: 18%;
+  }
 `;
 
 export const CharacterImg = styled.img`

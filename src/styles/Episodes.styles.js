@@ -9,6 +9,27 @@ export const GridContainer = styled.div`
   margin-top: 30px;
   justify-content: center;
   width: 100%;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 20% 20% 20% 20%;
+    margin-top: 30px !important;
+    margin: auto;
+    width: 90%;
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: 30% 30% 30%;
+    margin-top: 30px !important;
+    margin: auto;
+    width: 80%;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 40% 40%;
+    margin-top: 30px !important;
+    margin: auto;
+    width: 80%;
+  }
 `;
 
 export const SearchInputContainer = styled.div`
