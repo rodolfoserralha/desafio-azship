@@ -1,4 +1,4 @@
-### Desafio Azship
+### Desafio Ricky and Morty
 
 <img src="src/images/ricky-page.png" width="60%">
 
